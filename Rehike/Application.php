@@ -4,10 +4,8 @@ namespace Rehike;
 
 /**
  * Class implementing the base Rehike application
- * 
- * @static
  */
-final class Application extends Base {
+final class Application {
     /**
      * Production mode accessor
      * 
@@ -16,33 +14,35 @@ final class Application extends Base {
      * 
      * @var bool
      */
-    protected static $isProd;
+    public $isProd;
 
     /**
      * Module definitions
      */
-    protected static $runtimeInfo;
-    protected static $logger;
+    public $runtimeInfo;
+    public $logger;
+    public $router;
 
     /**
      * Insertion point
      */
-    public static function main() {
+    public function main() {
         // include required global constants
         require 'Rehike/constants.php';
-        self::setIsProd(REHIKE_PROD); // easy access from application and modules
+        $this -> isProd = REHIKE_PROD; // easy access from application and modules
         
         // include composer packages
         require 'vendor/autoload.php';
 
-        self::initModules();
+        $this -> initModules();
     }
 
     /**
      * Module initialiser
      */
-    protected static function initModules() {
-        self::setRuntimeInfo(new Modules\RuntimeInfo());
-        self::setLogger(new Modules\Logger\LoggerModule());
+    protected function initModules() {
+        $this -> runtimeInfo = new Modules\RuntimeInfo();
+        $this -> logger = new Modules\Logger\LoggerModule();
+        $this -> router = new Modules\Router();
     }
 }

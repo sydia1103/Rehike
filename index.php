@@ -13,4 +13,4 @@
 require 'autoloader.php';
 
 // Start the Rehike application.
-Rehike\Application::main();
+(new Rehike\Application) -> main();

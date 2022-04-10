@@ -43,6 +43,6 @@ final class Application extends Base {
      */
     protected static function initModules() {
         self::setRuntimeInfo(new Modules\RuntimeInfo());
-        self::setLogger(new Modules\Logger());
+        self::setLogger(new Modules\Logger\LoggerModule());
     }
 }
